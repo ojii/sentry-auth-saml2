@@ -1,0 +1,34 @@
+{% extends "sentry/bases/organization.html" %}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block org_settings_nav %}active{% endblock %}
+
+{% block main %}
+  <h3>SAML2 Settings</h3>
+
+  <div class="box">
+    <div class="box-content with-padding">
+      <form class="form-stacked" action="" method="post">
+        {% csrf_token %}
+        {{ form.provider }}
+        <input type="hidden" name="is-setup" value="true">
+
+        {% if form.errors %}
+          <div class="alert alert-block alert-error">{% trans "Please correct the errors below." %}</div>
+        {% endif %}
+
+        {{ form|as_crispy_errors }}
+
+        <legend style="margin-top: 0">Configuration</legend>
+
+        {{ form.metadata_url|as_crispy_field }}
+
+        <fieldset class="form-actions">
+          <button type="submit" class="btn btn-primary btn-lg">{% trans "Save Changes" %}</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+{% endblock %}
