@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'sentry>=8.10.0',
+    'pysaml2',
 ]
 
 tests_require = [
